@@ -6,19 +6,20 @@ clear
 
 $check_folder=Test-Path C:\Powershell4Support
 
-    If ($check_folder -eq $false) {
-
-                                    mkdir C:\Powershell4Support\Module3\Outputs\ 
-
-                                    }
+If ($check_folder -eq $false) 
+{
+    mkdir C:\Powershell4Support\Module3\Outputs\ 
+}
 
 clear
+
 ### This part is just to declare the options to choose
 
 Write-host "######################  Filter EventLog ###########################"
 Write-host ""
 Write-host "Developed by David Mena " -ForegroundColor Yellow
 Write-host "Powershell for Support Channel: https://www.youtube.com/user/dmenamar/ " -ForegroundColor Yellow
+Write-host "You can find all the scripts at: https://github.com/powershell4support/" -ForegroundColor Yellow
 Write-host ""
 Write-host "1.- Search Event by username " -ForegroundColor Cyan
 Write-host "2.- Search Event by EventID " -ForegroundColor Cyan
@@ -57,7 +58,6 @@ elseif ($Selected -eq "3")
     Get-EventLog -LogName Security |Where-object {$_.EventID -eq "6006"} |select entrytype,timegenerated,InstanceID,Message |ConvertTo-Html -Fragment |Out-File -FilePath C:\Powershell4Support\Module3\Outputs\Event_Log_Shutdown_Filtered.html -Append
     Invoke-item C:\Powershell4Support\Module3\Outputs\Event_Log_Shutdown_Filtered.html
 }
-
 elseif ($Selected -eq "4") 
 {
     Get-EventLog -LogName Application |Where-object {$_.EventID -eq "6005"} |select entrytype,timegenerated,InstanceID,Message |ConvertTo-Html  |Out-File -FilePath C:\Powershell4Support\Module3\Outputs\Event_Log_Start_Filtered.html
@@ -65,7 +65,6 @@ elseif ($Selected -eq "4")
     Get-EventLog -LogName Security |Where-object {$_.EventID -eq "6005"} |select entrytype,timegenerated,InstanceID,Message |ConvertTo-Html -Fragment |Out-File -FilePath C:\Powershell4Support\Module3\Outputs\Event_Log_Start_Filtered.html -Append
     Invoke-item C:\Powershell4Support\Module3\Outputs\Event_Log_Start_Filtered.html
 }
-
 elseif ($Selected -eq "5") 
 {
     Get-EventLog -LogName Application |Where-object {$_.EventID -eq "41"} |select entrytype,timegenerated,InstanceID,Message |ConvertTo-Html  |Out-File -FilePath C:\Powershell4Support\Module3\Outputs\Event_Log_NotClean_Filtered.html
@@ -73,7 +72,6 @@ elseif ($Selected -eq "5")
     Get-EventLog -LogName Security |Where-object {$_.EventID -eq "41"} |select entrytype,timegenerated,InstanceID,Message |ConvertTo-Html -Fragment |Out-File -FilePath C:\Powershell4Support\Module3\Outputs\Event_Log_NotClean_Filtered.html -Append
     Invoke-item C:\Powershell4Support\Module3\Outputs\Event_Log_NotClean_Filtered.html
 }
-
 elseif ($Selected -eq "6") 
 {
     Get-EventLog -LogName Application |Where-object {$_.EventID -eq "1074"} |select entrytype,timegenerated,InstanceID,Message |ConvertTo-Html  |Out-File -FilePath C:\Powershell4Support\Module3\Outputs\Event_Log_NotClean_Filtered.html
@@ -81,5 +79,8 @@ elseif ($Selected -eq "6")
     Get-EventLog -LogName Security |Where-object {$_.EventID -eq "1074"} |select entrytype,timegenerated,InstanceID,Message |ConvertTo-Html -Fragment |Out-File -FilePath C:\Powershell4Support\Module3\Outputs\Event_Log_NotClean_Filtered.html -Append
     Invoke-item C:\Powershell4Support\Module3\Outputs\Event_Log_NotClean_Filtered.html
 }
+else 
+{
+    exit
+}
 
-else {exit}
